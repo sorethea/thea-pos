@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesTableSeeder::class,
             UsersTableSeeder::class,
-            BannersTableSeeder::class,
-            BlogCategoriesTableSeeder::class,
-            BlogPostsTableSeeder::class,
+            //BannersTableSeeder::class,
+            //BlogCategoriesTableSeeder::class,
+            //BlogPostsTableSeeder::class,
         ]);
 
         Artisan::call('shield:generate --all');
