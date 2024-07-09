@@ -100,7 +100,7 @@ class ManageGeneral extends SettingsPage
                                 ->directory('sites')
                                 ->visibility('public')
                                 ->moveFiles()
-                                ->acceptedFileTypes(['image/x-icon', 'image/vnd.microsoft.icon'])
+                                //->acceptedFileTypes(['image/x-icon', 'image/vnd.microsoft.icon'])
                                 ->required(),
                         ])->columns(4),
                     ]),
