@@ -1,23 +1,3 @@
-# Define Node.js version
-ARG NODE_VERSION=20
-
-# Build Node.js stage
-FROM node:$NODE_VERSION-alpine AS node
-RUN apk add --no-cache libc-dev
-
-# Install npm and yarn globally
-RUN npm install -g yarn
-
-# Copy dependencies (if any)
-COPY package.json yarn.lock ./
-
-# Install dependencies
-RUN yarn install
-
-
-# Copy Node.js modules from build stage
-COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
-
 FROM php:8.3-fpm
 
 # Copy composer.lock and composer.json
@@ -57,8 +37,8 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd
 
-
-
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt-get update && apt-get install -y nodejs yarn
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
