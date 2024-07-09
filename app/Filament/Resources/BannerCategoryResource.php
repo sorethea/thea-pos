@@ -20,7 +20,7 @@ class BannerCategoryResource extends Resource
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?int $navigationSort = -1;
-    protected static ?string $navigationIcon = 'fluentui-stack-20-regular';
+    protected static ?string $navigationIcon = 'fluentui-stack-20-r';
     protected static ?string $navigationLabel = 'Categories';
     protected static ?string $navigationGroup = 'Banner';
 
