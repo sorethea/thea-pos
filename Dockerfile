@@ -37,6 +37,26 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd
 
+
+
+# Install Node.js packages
+RUN apk add --no-cache libc-dev
+
+# Install Node.js using official source
+RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION | bash -
+
+# Install Node.js and npm
+RUN apk add --no-cache nodejs
+
+# Install yarn globally
+RUN npm install -g yarn
+
+# Copy dependencies (if any)
+COPY package.json yarn.lock ./
+
+# Install dependencies
+RUN yarn install
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -56,3 +76,4 @@ USER www
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
+
